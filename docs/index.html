@@ -1,1110 +1,266 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Pasteleria Y Panaderia La Ideal 2 — Fresh Mexican Bakery in Kent, WA</title>
-
-  <meta
-    name="description"
-    content="Authentic Mexican bakery in Kent, WA. Fresh conchas, pan dulce, cakes, cookies, flan, and coffee — baked daily. Panadería mexicana auténtica."
-  />
-
-  <meta
-    property="og:title"
-    content="Pasteleria Y Panaderia La Ideal 2"
-  />
-
-  <meta
-    property="og:description"
-    content="Freshly baked Mexican breads, pastries, and cakes in Kent, WA. Pan recién horneado todos los días."
-  />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/variety.jpg" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  />
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Nunito:wght@400;600;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <style>
-    :root {
-      --cream: #fdf6ec;
-      --cream-2: #f7ead4;
-      --rose: #c96b6b;
-      --rose-dark: #a14848;
-      --caramel: #b07a3b;
-      --caramel-dark: #8a5c25;
-      --chocolate: #3b2418;
-      --ink: #2a1a12;
-      --muted: #7a5f4f;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Nunito", system-ui, sans-serif;
-      color: var(--ink);
-      background: var(--cream);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    h1,
-    h2,
-    h3 {
-      font-family: "Fraunces", Georgia, serif;
-      font-weight: 600;
-      line-height: 1.15;
-      color: var(--chocolate);
-    }
-
-    h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-    }
-
-    h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin-bottom: 0.5rem;
-    }
-
-    h3 {
-      font-size: 1.35rem;
-    }
-
-    .script {
-      font-family: "Caveat", cursive;
-      color: var(--rose);
-      font-size: 1.6rem;
-      font-weight: 700;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(253, 246, 236, 0.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(176, 122, 59, 0.15);
-    }
-
-    .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 1.5rem;
-      gap: 1rem;
-    }
-
-    .brand {
-      font-family: "Fraunces", serif;
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: var(--chocolate);
-    }
-
-    .brand span {
-      color: var(--rose);
-    }
-
-    .nav-links {
-      display: none;
-      gap: 2rem;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .nav-links a:hover {
-      color: var(--rose);
-    }
-
-    @media (min-width: 768px) {
-      .nav-links {
-        display: flex;
-      }
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .lang-toggle {
-      display: inline-flex;
-      background: #fff;
-      border: 1px solid rgba(176, 122, 59, 0.3);
-      border-radius: 999px;
-      padding: 3px;
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-
-    .lang-toggle button {
-      border: none;
-      background: transparent;
-      padding: 0.35rem 0.7rem;
-      border-radius: 999px;
-      cursor: pointer;
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    .lang-toggle button.active {
-      background: var(--rose);
-      color: #fff;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--rose);
-      color: #fff;
-      padding: 0.75rem 1.5rem;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      border: none;
-      cursor: pointer;
-      transition: all 0.25s;
-      box-shadow: 0 6px 20px rgba(201, 107, 107, 0.25);
-    }
-
-    .btn:hover {
-      background: var(--rose-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(201, 107, 107, 0.35);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--chocolate);
-      border: 2px solid var(--rose-dark);
-      box-shadow: none;
-    }
-
-    .btn-outline:hover {
-      background: var(--caramel);
-      color: #fff;
-    }
-
-    .hero {
-      position: relative;
-      min-height: 88vh;
-      display: flex;
-      align-items: center;
-      background:
-        linear-gradient(
-          135deg,
-          rgba(253, 246, 236, 0.85),
-          rgba(247, 234, 212, 0.7)
-        ),
-        url("assets/variety.jpg") center/cover no-repeat;
-      padding: 6rem 1.5rem;
-      overflow: hidden;
-    }
-
-    .hero-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .hero-content {
-      max-width: 680px;
-    }
-
-    .hero h1 {
-      margin: 1rem 0 1.5rem;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      color: var(--muted);
-      margin-bottom: 2rem;
-      max-width: 540px;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .float {
-      position: absolute;
-      opacity: 0.6;
-      font-size: 3rem;
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .float.f1 {
-      top: 12%;
-      right: 8%;
-    }
-
-    .float.f2 {
-      bottom: 18%;
-      right: 18%;
-      animation-delay: 2s;
-    }
-
-    .float.f3 {
-      top: 30%;
-      right: 30%;
-      animation-delay: 4s;
-      display: none;
-    }
-
-    @media (min-width: 900px) {
-      .float.f3 {
-        display: block;
-      }
-    }
-
-    @keyframes float {
-      0%,
-      100% {
-        transform: translateY(0) rotate(-5deg);
-      }
-
-      50% {
-        transform: translateY(-20px) rotate(5deg);
-      }
-    }
-
-    section {
-      padding: 5rem 1.5rem;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-head {
-      text-align: center;
-      margin-bottom: 3.5rem;
-    }
-
-    .section-head .script {
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-
-    .section-head p {
-      color: var(--muted);
-      max-width: 640px;
-      margin: 1rem auto 0;
-      font-size: 1.05rem;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(59, 36, 24, 0.06);
-      transition: transform 0.35s, box-shadow 0.35s;
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(59, 36, 24, 0.12);
-    }
-
-    .card-img {
-      height: 240px;
-      overflow: hidden;
-    }
-
-    .card-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s;
-    }
-
-    .card:hover .card-img img {
-      transform: scale(1.08);
-    }
-
-    .card-body {
-      padding: 1.5rem;
-    }
-
-    .card-body h3 {
-      margin-bottom: 0.5rem;
-    }
-
-    .card-body p {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .why {
-      background: linear-gradient(
-        180deg,
-        var(--cream) 0%,
-        var(--cream-2) 100%
-      );
-    }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-      margin-top: 1rem;
-    }
-
-    .why-card {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 4px 16px rgba(59, 36, 24, 0.05);
-    }
-
-    .icon-bubble {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: linear-gradient(
-        135deg,
-        var(--rose),
-        var(--caramel)
-      );
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.75rem;
-      margin-bottom: 1rem;
-      color: #fff;
-    }
-
-    .story {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    @media (min-width: 900px) {
-      .story {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .story img {
-      border-radius: 24px;
-      box-shadow: 0 20px 40px rgba(59, 36, 24, 0.15);
-    }
-
-    .story p {
-      color: var(--muted);
-      margin-top: 1.5rem;
-      font-size: 1.05rem;
-    }
-    
-    .testi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .testi {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 4px 16px rgba(59, 36, 24, 0.05);
-    }
-
-    .stars {
-      color: #e6b653;
-      margin-bottom: 1rem;
-      letter-spacing: 2px;
-    }
-
-    .testi-quote {
-      font-style: italic;
-      color: var(--ink);
-      margin-bottom: 1rem;
-      font-size: 1.05rem;
-    }
-
-    .testi-name {
-      font-weight: 700;
-      color: var(--caramel-dark);
-    }
-
-    .visit {
-      background: var(--chocolate);
-      color: #f7ead4;
-    }
-
-    .visit h2 {
-      color: #fff;
-    }
-
-    .visit .script {
-      color: #f3b9b9;
-    }
-
-    .visit-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-
-    @media (min-width: 768px) {
-      .visit-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .info-card {
-      background: rgba(255, 255, 255, 0.06);
-      padding: 2rem;
-      border-radius: 20px;
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .info-card .icon-bubble {
-      background: linear-gradient(
-        135deg,
-        #f3b9b9,
-        #e6b653
-      );
-    }
-
-    .info-card h3 {
-      color: #fff;
-      margin-bottom: 0.75rem;
-    }
-
-    .info-card p {
-      color: #e8d5b8;
-      font-size: 0.95rem;
-    }
-
-    .call-cta {
-      text-align: center;
-      margin-top: 3rem;
-    }
-
-    .call-cta .btn {
-      font-size: 1.1rem;
-      padding: 1rem 2.25rem;
-    }
-
-    .gallery {
-      background: var(--cream);
-    }
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
-  margin-top: 2rem;
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Bellas Artes Bakery — Pan Dulce & Custom Cakes in Federal Way, WA</title>
+<meta name="description" content="Bellas Artes Bakery in Federal Way, WA. Pan dulce, wedding & birthday cakes, tres leches, empanadas, conchas and traditional Mexican baked goods made fresh daily." />
+<meta property="og:title" content="Bellas Artes Bakery" />
+<meta property="og:description" content="Traditional Mexican bakery in Federal Way, WA — pan dulce, custom cakes, tres leches and more, baked fresh every day." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,800;1,500&family=Inter:wght@400;500;600&display=swap" />
+<style>
+:root{
+  --cream:#fff7ee; --blush:#fde2e4; --pink:#f7c5cc; --rose:#e8889a; --rose-deep:#b85c6f;
+  --mint:#cdeac0; --butter:#ffe9b0; --lilac:#e2d4f0; --ink:#3b2a2f; --muted:#7a6b6f;
+  --line:rgba(59,42,47,.10); --shadow:0 10px 30px rgba(184,92,111,.12); --radius:18px;
 }
-
-.gallery-grid img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 14px;
-  transition: transform 0.4s;
-}
-
-    .gallery-grid img:hover {
-      transform: scale(1.03);
-    }
-
-    footer {
-      background: #1f120a;
-      color: #c9b39a;
-      padding: 2.5rem 1.5rem;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    footer .brand {
-      color: #fff;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-
-    [data-i18n-es] {
-      display: none;
-    }
-
-    html[lang="es"] [data-i18n-en] {
-      display: none;
-    }
-
-    html[lang="es"] [data-i18n-es] {
-      display: inline;
-    }
-
-    html[lang="es"] [data-i18n-es].block {
-      display: block;
-    }
-    {
---cream: #fff8f0;
---cream-2: #f9ecd8;
-
---rose: #d95f59;
---rose-dark: #b9443f;
-
---caramel: #c48a42;
---caramel-dark: #9c6426;
-
---chocolate: #2e1b12;
---ink: #29160d;
---muted: #6f5b4f;
-}
-
-/* Better typography */
-
-h1 {
-font-weight: 700;
-letter-spacing: -0.03em;
-}
-
-h2 {
-font-weight: 700;
-letter-spacing: -0.02em;
-}
-
-.hero h1 {
-max-width: 10ch;
-}
-
-/* Premium navigation */
-
-.nav {
-background: rgba(255, 248, 240, 0.85);
-backdrop-filter: blur(16px);
-box-shadow: 0 4px 20px rgba(59, 36, 24, 0.05);
-}
-
-.nav-links a {
-position: relative;
-}
-
-.nav-links a::after {
-content: "";
-position: absolute;
-left: 0;
-bottom: -6px;
-
-width: 0;
-height: 2px;
-
-background: var(--rose);
-transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after {
-width: 100%;
-}
-
-/* Better buttons */
-
-.btn {
-background: linear-gradient(
-135deg,
-var(--rose),
-var(--rose-dark)
-);
-
-box-shadow:
-0 10px 25px rgba(217, 95, 89, 0.25);
-
-transition: all 0.3s ease;
-}
-
-.btn {
-transform: translateY(-3px) scale(1.02);
-
-box-shadow:
-0 16px 40px rgba(217, 95, 89, 0.35);
-}
-
-/* Hero improvements */
-
-.hero {
-background:
-linear-gradient(
-90deg,
-rgba(255, 248, 240, 0.95) 0%,
-rgba(255, 248, 240, 0.75) 45%,
-rgba(255, 248, 240, 0.35) 100%
-),
-url("assets/variety.jpg")
-center/cover no-repeat;
-}
-
-.hero::after {
-content: "";
-
-position: absolute;
-inset: 0;
-
-background:
-radial-gradient(
-circle at top right,
-rgba(217, 95, 89, 0.12),
-transparent 40%
-);
-
-pointer-events: none;
-}
-
-/* Better sections */
-
-section {
-position: relative;
-}
-
-section::before {
-content: "";
-
-position: absolute;
-
-left: 50%;
-top: 0;
-
-width: 120px;
-height: 4px;
-
-transform: translateX(-50%);
-
-border-radius: 999px;
-
-background:
-linear-gradient(
-90deg,
-transparent,
-var(--rose),
-transparent
-);
-}
-
-/* Softer textured background */
-
-.why {
-background:
-radial-gradient(
-circle at top left,
-rgba(217, 95, 89, 0.08),
-transparent 40%
-),
-linear-gradient(
-180deg,
-var(--cream),
-var(--cream-2)
-);
-}
-
-/* Premium cards */
-
-.card,
-.why-card,
-.testi {
-background: rgba(255, 255, 255, 0.92);
-
-backdrop-filter: blur(8px);
-
-border: 1px solid rgba(217, 95, 89, 0.12);
-
-border-radius: 28px;
-
-box-shadow:
-0 10px 30px rgba(59, 36, 24, 0.08),
-0 2px 8px rgba(59, 36, 24, 0.04);
-
-transition: all 0.35s ease;
-}
-
-.card,
-.why-card,
-.testi {
-transform: translateY(-10px);
-
-box-shadow:
-0 25px 60px rgba(59, 36, 24, 0.14),
-0 10px 25px rgba(59, 36, 24, 0.08);
-}
-
-/* Better images */
-
-.story img,
-.gallery-grid img,
-.card-img img {
-border: 4px solid rgba(255, 255, 255, 0.8);
-}
-
-/* Gallery improvements */
-
-.gallery-grid {
-grid-auto-flow: dense;
-}
-
-.gallery-grid img(3),
-.gallery-grid img(7) {
-grid-column: span 2;
-aspect-ratio: 2 / 1;
-}
-
-/* More premium icon bubbles */
-
-.icon-bubble {
-background:
-linear-gradient(
-135deg,
-var(--rose),
-var(--caramel)
-);
-
-box-shadow:
-0 10px 25px rgba(201, 107, 107, 0.25);
-}
-
-/* Visit section glow */
-
-.visit {
-position: relative;
-overflow: hidden;
-}
-
-.visit::before {
-content: "";
-
-position: absolute;
-
-width: 500px;
-height: 500px;
-
-top: -250px;
-right: -250px;
-
-border-radius: 50%;
-
-background:
-radial-gradient(
-circle,
-rgba(255,255,255,0.08),
-transparent 70%
-);
-}
-
-/* Better info cards */
-
-.info-card {
-transition: all 0.3s ease;
-}
-
-.info-card {
-transform: translateY(-8px);
-
-background: rgba(255,255,255,0.1);
-}
-
-/* Footer upgrade */
-
-footer {
-border-top: 1px solid rgba(255,255,255,0.08);
-}
-
-/* Floating bakery emojis */
-
-.float {
-filter:
-drop-shadow(
-0 10px 20px rgba(0,0,0,0.12)
-);
-}
-  </style>
-  
+*{box-sizing:border-box}
+body{margin:0;font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.01em;margin:0 0 .4em}
+h1{font-size:clamp(2.4rem,5vw,4.2rem);line-height:1.05;font-weight:800}
+h2{font-size:clamp(1.8rem,3vw,2.6rem)}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+a{color:var(--rose-deep);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1160px;margin:0 auto;padding:0 24px}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,247,238,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px;max-width:1160px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:700;font-size:1.15rem}
+.brand-mark{width:36px;height:36px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,var(--pink) 60%,var(--rose));box-shadow:var(--shadow)}
+.nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;font-size:.95rem}
+.nav ul a{color:var(--ink)}
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:600;font-size:.95rem;transition:transform .15s,box-shadow .15s;cursor:pointer;border:0}
+.btn-primary{background:var(--rose-deep);color:#fff}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:var(--shadow);text-decoration:none}
+.btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+@media(max-width:780px){.nav ul{display:none}}
+.hero{padding:80px 0 90px;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+.eyebrow{display:inline-block;background:var(--lilac);color:#5a3f7a;padding:6px 14px;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px}
+.hero p.lead{font-size:1.15rem;color:var(--muted);max-width:46ch;margin-bottom:28px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:32px;margin-top:42px;padding-top:28px;border-top:1px dashed var(--line);flex-wrap:wrap}
+.hero-stats div span{display:block;font-family:'Fraunces',serif;font-size:1.6rem;color:var(--rose-deep);font-weight:700}
+.hero-stats div small{color:var(--muted);font-size:.85rem}
+.hero-art{position:relative;aspect-ratio:1/1;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff 0,var(--blush) 35%,var(--pink) 70%,var(--rose) 100%);box-shadow:0 30px 80px rgba(184,92,111,.25);display:flex;align-items:center;justify-content:center}
+.hero-art::before,.hero-art::after{content:"";position:absolute;border-radius:50%}
+.hero-art::before{width:120px;height:120px;background:var(--mint);top:-20px;right:30px;box-shadow:var(--shadow)}
+.hero-art::after{width:90px;height:90px;background:var(--butter);bottom:10px;left:-10px;box-shadow:var(--shadow)}
+.hero-emoji{font-size:8rem;filter:drop-shadow(0 8px 20px rgba(0,0,0,.15))}
+@media(max-width:880px){.hero-grid{grid-template-columns:1fr}.hero-art{max-width:360px;margin:0 auto}}
+section{padding:80px 0}
+.section-head{text-align:center;max-width:640px;margin:0 auto 50px}
+.section-head p{color:var(--muted)}
+.highlights{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.hl{background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hl::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--hl-color,var(--pink))}
+.hl .emoji{font-size:2.2rem;display:block;margin:8px 0 14px}
+.badge{display:inline-block;background:var(--blush);color:var(--rose-deep);font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.04em;text-transform:uppercase}
+.hl h3{margin:6px 0 4px;font-size:1.1rem}
+.hl p{font-size:.9rem;color:var(--muted);margin:0}
+@media(max-width:880px){.highlights{grid-template-columns:repeat(2,1fr)}}
+.menu-wrap{background:linear-gradient(180deg,#fff,var(--blush) 100%);border-radius:28px;padding:50px 40px;box-shadow:var(--shadow)}
+.menu-source{text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:30px}
+.menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:40px}
+.menu-cat h3{font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:14px;padding-bottom:10px;border-bottom:2px dotted var(--pink);color:var(--rose-deep)}
+.menu-item{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line)}
+.menu-item:last-child{border-bottom:none}
+.menu-item .name{font-weight:500}
+.menu-item .price{color:var(--rose-deep);font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+.menu-item .desc{display:block;font-size:.82rem;color:var(--muted);margin-top:4px;font-style:italic;max-width:46ch}
+@media(max-width:780px){.menu-grid{grid-template-columns:1fr}.menu-wrap{padding:30px 20px}}
+.reviews{background:var(--lilac)}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.review{background:#fff;border-radius:var(--radius);padding:26px;box-shadow:0 6px 20px rgba(90,63,122,.08);display:flex;flex-direction:column}
+.review-feature{background:var(--butter)}
+.feature-quote{font-family:'Fraunces',serif;font-size:1.15rem;font-style:italic}
+.stars{color:#e8a93a;letter-spacing:2px;margin-bottom:10px}
+.review p{font-size:.95rem;color:#4a3a3f;flex:1}
+.review .who{display:flex;align-items:center;gap:12px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--pink);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-family:'Fraunces',serif}
+.avatar-rose{background:var(--rose-deep)}
+.review .who small{display:block;color:var(--muted);font-size:.78rem}
+@media(max-width:880px){.reviews-grid{grid-template-columns:1fr}}
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.info-card{background:#fff;border-radius:var(--radius);padding:32px;box-shadow:var(--shadow)}
+.info-card h3{color:var(--rose-deep);margin-bottom:6px}
+.info-card p{margin:0 0 18px;color:var(--muted)}
+.hours{list-style:none;padding:0;margin:0}
+.hours li{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px dashed var(--line);font-size:.95rem}
+.hours li:last-child{border-bottom:none}
+.hours li span:first-child{color:var(--ink);font-weight:500}
+.contact-line{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+.contact-line .ic{width:38px;height:38px;border-radius:10px;background:var(--blush);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.contact-line strong{display:block;margin-bottom:2px}
+.contact-line a{color:var(--ink)}
+@media(max-width:880px){.visit-grid{grid-template-columns:1fr}}
+footer{background:var(--ink);color:#f7e3e7;padding:50px 0 30px;text-align:center}
+.brand-footer{justify-content:center;color:#fff;display:inline-flex}
+footer p{color:#d6bfc4;font-size:.9rem;margin-top:12px}
+footer .small{font-size:.78rem;color:#a7929a;margin-top:24px}
+</style>
 </head>
-
 <body>
+<header class="nav"><div class="nav-inner">
+  <div class="brand"><div class="brand-mark"></div>Bellas Artes Bakery</div>
+  <ul><li><a href="#menu">Menu</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#visit">Visit</a></li></ul>
+  <a class="btn btn-primary" href="tel:+12539460133">Call (253) 946-0133</a>
+</div></header>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <div class="brand">La Ideal <span>2</span></div>
-    <div class="nav-links">
-      <a href="#products"><span data-i18n-en>Products</span><span data-i18n-es>Productos</span></a>
-      <a href="#story"><span data-i18n-en>Our Story</span><span data-i18n-es>Nuestra Historia</span></a>
-      <a href="#visit"><span data-i18n-en>Visit</span><span data-i18n-es>Visítanos</span></a>
+<main>
+<section class="hero"><div class="container hero-grid">
+  <div>
+    <span class="eyebrow">Federal Way, WA · Family-owned</span>
+    <h1>Pan dulce, cakes &amp; sweet little moments.</h1>
+    <p class="lead">Traditional Mexican baked goods, custom celebration cakes, and trays of warm pan dulce baked fresh every day at Bellas Artes Bakery.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#menu">See the menu</a>
+      <a class="btn btn-ghost" href="#visit">Visit the bakery</a>
     </div>
-    <div class="nav-right">
-      <div class="lang-toggle" role="group" aria-label="Language">
-        <button type="button" data-lang="en" class="active">EN</button>
-        <button type="button" data-lang="es">ES</button>
-      </div>
-      <a href="tel:+12066517514" class="btn"><span data-i18n-en>Call</span><span data-i18n-es>Llamar</span></a>
+    <div class="hero-stats">
+      <div><span>★ 4.8</span><small>Loved on Google</small></div>
+      <div><span>40+</span><small>Items daily</small></div>
+      <div><span>9–9</span><small>Open late</small></div>
     </div>
   </div>
-</nav>
+  <div class="hero-art" aria-hidden="true"><div class="hero-emoji">🎂</div></div>
+</div></section>
 
-<header class="hero">
-  <span class="float f1">🥐</span>
-  <span class="float f2">☕</span>
-  <span class="float f3">🫓</span>
-  <div class="hero-inner">
-    <div class="hero-content">
-      <span class="script">
-        <span data-i18n-en>Freshly baked every morning</span>
-        <span data-i18n-es>Recién horneado cada mañana</span>
-      </span>
-      <h1>
-        <span data-i18n-en>Tradition you can taste, baked with love.</span>
-        <span data-i18n-es>Tradición que puedes saborear, horneada con amor.</span>
-      </h1>
-      <p>
-        <span data-i18n-en>Authentic Mexican breads, cakes, cookies, and pastries — handmade daily in Kent, WA.</span>
-        <span data-i18n-es>Pan mexicano auténtico, pasteles, galletas y pan dulce — hecho a mano todos los días en Kent, WA.</span>
-      </p>
-      <div class="hero-cta">
-        <a href="tel:+12066517514" class="btn btn-outline">📞 <span data-i18n-en>Call for Details</span><span data-i18n-es>Llame para más información</span></a>
-        <a href="#products" class="btn btn-outline"><span data-i18n-en>View Our Treats</span><span data-i18n-es>Ver Productos</span></a>
+<section id="highlights"><div class="container">
+  <div class="section-head"><h2>Menu highlights</h2><p>A few of our most-loved bakes — pulled straight off the trays.</p></div>
+  <div class="highlights">
+    <div class="hl" style="--hl-color:var(--pink)"><span class="badge">Popular</span><span class="emoji">🥖</span><h3>Pan</h3><p>Daily-baked breads, warm from the oven.</p></div>
+    <div class="hl" style="--hl-color:var(--butter)"><span class="badge">Popular</span><span class="emoji">💍</span><h3>Wedding Cake</h3><p>Tiered showstoppers designed with you.</p></div>
+    <div class="hl" style="--hl-color:var(--mint)"><span class="badge">Birthday</span><span class="emoji">🎉</span><h3>½ Sheet Birthday Cake</h3><p>Custom flavors and themes for the big day.</p></div>
+    <div class="hl" style="--hl-color:var(--lilac)"><span class="badge">Custom</span><span class="emoji">🎂</span><h3>2-Tier &amp; Bridal Cakes</h3><p>Elegant tiered cakes made to order.</p></div>
+  </div>
+</div></section>
+
+<section id="menu" style="padding-top:0"><div class="container">
+  <div class="section-head"><h2>Full menu</h2><p>Pan dulce, specialties, cookies and more.</p></div>
+  <div class="menu-wrap">
+    <div class="menu-source">Provided by DoorDash · updated less than a day ago</div>
+    <div class="menu-grid">
+
+      <div class="menu-cat"><h3>Pan Dulce</h3>
+        <div class="menu-item"><div><span class="name">White Concha</span></div><span class="price">$1.50</span></div>
+        <div class="menu-item"><div><span class="name">Pink Concha</span></div><span class="price">$1.50</span></div>
+        <div class="menu-item"><div><span class="name">Chocolate Concha</span></div><span class="price">$1.50</span></div>
+        <div class="menu-item"><div><span class="name">Yellow Concha</span></div><span class="price">$1.50</span></div>
+        <div class="menu-item"><div><span class="name">Mantecada</span></div><span class="price">$1.99</span></div>
+        <div class="menu-item"><div><span class="name">Ojo De Buey</span></div><span class="price">$2.50</span></div>
+        <div class="menu-item"><div><span class="name">Niño Embuelto</span></div><span class="price">$2.00</span></div>
       </div>
+
+      <div class="menu-cat"><h3>Puff Pastry Empanadas De Ojaldre</h3>
+        <div class="menu-item"><div><span class="name">Raspberry</span></div><span class="price">$2.99</span></div>
+        <div class="menu-item"><div><span class="name">Lemon</span></div><span class="price">$2.99</span></div>
+        <div class="menu-item"><div><span class="name">Apple</span></div><span class="price">$2.99</span></div>
+        <div class="menu-item"><div><span class="name">Dulce De Leche</span></div><span class="price">$2.99</span></div>
+      </div>
+
+      <div class="menu-cat"><h3>Empanadas</h3>
+        <div class="menu-item"><div><span class="name">Bavarian Cream with Sugar</span></div><span class="price">$1.99</span></div>
+        <div class="menu-item"><div><span class="name">Strawberry</span></div><span class="price">$1.99</span></div>
+        <div class="menu-item"><div><span class="name">Pineapple</span></div><span class="price">$1.99</span></div>
+      </div>
+
+      <div class="menu-cat"><h3>Pan De Feite</h3>
+        <div class="menu-item"><div><span class="name">Almoada</span></div><span class="price">$1.99</span></div>
+        <div class="menu-item"><div><span class="name">Laurel</span></div><span class="price">$1.99</span></div>
+        <div class="menu-item"><div><span class="name">Bavarian Cream Cono</span></div><span class="price">$1.99</span></div>
+        <div class="menu-item"><div><span class="name">Oreja</span></div><span class="price">$1.99</span></div>
+        <div class="menu-item"><div><span class="name">Broca</span></div><span class="price">$1.99</span></div>
+        <div class="menu-item"><div><span class="name">Strawberry Cuadro</span></div><span class="price">$1.99</span></div>
+        <div class="menu-item"><div><span class="name">Pineapple Cuadro</span></div><span class="price">$1.99</span></div>
+      </div>
+
+      <div class="menu-cat"><h3>Rosca de Reyes</h3>
+        <div class="menu-item"><div><span class="name">Rosca De Reyes — Small</span><span class="desc">Traditional crown-shaped sweet bread for Día de los Reyes Magos. Hidden figurine inside (not edible).</span></div><span class="price">$27.00</span></div>
+        <div class="menu-item"><div><span class="name">Rosca De Reyes — Medium</span><span class="desc">Decorated with candied fruits. Finder of the figurine hosts a tamale party on Candlemas (Feb 2nd).</span></div><span class="price">$45.00</span></div>
+        <div class="menu-item"><div><span class="name">Rosca De Reyes — Large</span><span class="desc">Our largest crown — perfect for big family gatherings on January 6th.</span></div><span class="price">$65.00</span></div>
+      </div>
+
+      <div class="menu-cat"><h3>Cheesecake</h3>
+        <div class="menu-item"><div><span class="name">Mex Style Cheesecake Slice</span></div><span class="price">$3.99</span></div>
+        <div class="menu-item"><div><span class="name">Chocolate / Strawberry Cheesecake Slice</span></div><span class="price">$3.99</span></div>
+      </div>
+
+      <div class="menu-cat"><h3>Tres Leches Slice</h3>
+        <div class="menu-item"><div><span class="name">Walnuts</span></div><span class="price">$4.99</span></div>
+        <div class="menu-item"><div><span class="name">Bavarian Cream</span></div><span class="price">$4.99</span></div>
+        <div class="menu-item"><div><span class="name">Pineapple</span></div><span class="price">$4.99</span></div>
+        <div class="menu-item"><div><span class="name">Guava</span></div><span class="price">$4.99</span></div>
+        <div class="menu-item"><div><span class="name">Strawberry</span></div><span class="price">$4.99</span></div>
+        <div class="menu-item"><div><span class="name">Dulce De Leche</span></div><span class="price">$4.99</span></div>
+        <div class="menu-item"><div><span class="name">Raspberry</span></div><span class="price">$4.99</span></div>
+        <div class="menu-item"><div><span class="name">Coconut</span></div><span class="price">$4.99</span></div>
+      </div>
+
+      <div class="menu-cat"><h3>Galletas — Cookies</h3>
+        <div class="menu-item"><div><span class="name">Polvaron Sevellano Multicolor</span></div><span class="price">$1.50</span></div>
+        <div class="menu-item"><div><span class="name">Tri Color Polvaron</span></div><span class="price">$1.50</span></div>
+        <div class="menu-item"><div><span class="name">Yellow Polvaron</span></div><span class="price">$1.50</span></div>
+        <div class="menu-item"><div><span class="name">Pink Polvaron</span></div><span class="price">$1.50</span></div>
+        <div class="menu-item"><div><span class="name">Peanut Butter Polvaron</span></div><span class="price">$1.50</span></div>
+        <div class="menu-item"><div><span class="name">Yellow Flower</span></div><span class="price">$1.50</span></div>
+        <div class="menu-item"><div><span class="name">Pink Flower</span></div><span class="price">$1.50</span></div>
+        <div class="menu-item"><div><span class="name">Blue Flower</span></div><span class="price">$1.50</span></div>
+        <div class="menu-item"><div><span class="name">White Flower</span></div><span class="price">$1.50</span></div>
+        <div class="menu-item"><div><span class="name">Happy Face Cookie</span></div><span class="price">$1.50</span></div>
+        <div class="menu-item"><div><span class="name">Sprinkles Cookie</span></div><span class="price">$1.50</span></div>
+        <div class="menu-item"><div><span class="name">Cinnamon Heart</span></div><span class="price">$1.50</span></div>
+      </div>
+
     </div>
   </div>
-</header>
+</div></section>
 
-<section id="products">
-  <div class="container">
-    <div class="section-head">
-      <span class="script"><span data-i18n-en>Our specialties - Prices Start At $1.25</span><span data-i18n-es>Nuestras especialidades - ¡Los precios comienzan en $1.25!</span></span>
-      <h2><span data-i18n-en>Made fresh, every single day!</span><span data-i18n-es>Hecho fresco, todos los días</span></h2>
-      <p>
-        <span data-i18n-en>From crusty artisan loaves to celebration cakes, every item is crafted in-house with care.</span>
-        <span data-i18n-es>Desde pan artesanal hasta pasteles de celebración, todo se elabora en casa con cariño.</span>
-      </p>
+<section id="reviews" class="reviews"><div class="container">
+  <div class="section-head"><h2>What guests are saying</h2><p>From wedding cakes to a quick concha on the way home.</p></div>
+  <div class="reviews-grid">
+    <div class="review"><div class="stars">★★★★★</div><p>"We are extremely happy with our wedding cake from here. Before going to this shop, we visited and researched many other cake places and were very disappointed by the prices. Other places charged a hefty price for a tiny cake."</p><div class="who"><div class="avatar">R</div><div><strong>Rarest Beauty</strong><small>3 reviews · 10 months ago</small></div></div></div>
+    <div class="review"><div class="stars">★★★★★</div><p>"Went there for the 1st time for my birthday cake and the cake was perfect. So moist and yummy. My family and friends can't stop talking about it. Just the right amount of sweetness, and very affordable."</p><div class="who"><div class="avatar">D</div><div><strong>dzein kaeral</strong><small>Local Guide · 1 year ago</small></div></div></div>
+    <div class="review"><div class="stars">★★★★★</div><p>"Great place for cakes and desserts! Been here for years! Wouldn't trust any other bakery — this is the best one for me."</p><div class="who"><div class="avatar">C</div><div><strong>Crysss</strong><small>Local Guide · 8 months ago</small></div></div></div>
+    <div class="review"><div class="stars">★★★★★</div><p>"If you're looking for something sweet and cheap, I really recommend coming here and grabbing some pan dulce. So many to choose from and literally so good and so inexpensive."</p><div class="who"><div class="avatar">A</div><div><strong>Angellina Medina</strong><small>Local Guide · 2 years ago</small></div></div></div>
+    <div class="review"><div class="stars">★★★★★</div><p>"They did an amazing job on this cake and it was delicious 😋 — it looks exactly like the picture we asked for and they are not overly priced. We will use this bakery again for future cakes."</p><div class="who"><div class="avatar">V</div><div><strong>Vonda Walkama</strong><small>6 reviews · 3 years ago</small></div></div></div>
+    <div class="review review-feature"><div class="stars">★★★★★</div><p class="feature-quote">"The best pan dulce in Federal Way — and the kindest people behind the counter."</p><div class="who"><div class="avatar avatar-rose">♡</div><div><strong>Neighborhood favorite</strong><small>Bellas Artes regulars</small></div></div></div>
+  </div>
+</div></section>
+
+<section id="visit"><div class="container">
+  <div class="section-head"><h2>Visit the bakery</h2><p>Stop by for a tray of warm pan dulce or to talk about your next custom cake.</p></div>
+  <div class="visit-grid">
+    <div class="info-card">
+      <h3>Find us</h3>
+      <div class="contact-line"><div class="ic">📍</div><div><strong>Address</strong><a href="https://www.google.com/maps/search/?api=1&query=29314+Pacific+Hwy+S+101A+Federal+Way+WA+98003" target="_blank" rel="noopener noreferrer">29314 Pacific Hwy S #101A<br/>Federal Way, WA 98003</a></div></div>
+      <div class="contact-line"><div class="ic">📞</div><div><strong>Phone</strong><a href="tel:+12539460133">(253) 946-0133</a></div></div>
+      <div class="contact-line"><div class="ic">🎂</div><div><strong>Custom cakes</strong>Call ahead for wedding, birthday, and bridal cakes — we love a good project.</div></div>
     </div>
-    <div class="grid">
-      <article class="card"><div class="card-img"><img src="assets/cakes.jpg" alt="Custom celebration cakes" /></div><div class="card-body">
-        <h3><span data-i18n-en>Cakes &amp; Custom Cakes</span><span data-i18n-es>Pasteles y Pasteles a la Medida</span></h3>
-        <p><span data-i18n-en>Hand-decorated cakes for birthdays, graduations, and every celebration.</span><span data-i18n-es>Pasteles decorados a mano para cumpleaños, graduaciones y toda celebración.</span></p>
-      </div></article>
-      <article class="card"><div class="card-img"><img src="assets/layered.jpg" alt="Sweet pastries" /></div><div class="card-body">
-        <h3><span data-i18n-en>Sweet Pastries</span><span data-i18n-es>Pan Dulce</span></h3>
-        <p><span data-i18n-en>Buttery, flaky, golden — layered cake, churros, and croissants straight from the oven.</span><span data-i18n-es>Mantecoso y hojaldrado — pastel en capas, churros y cuernitos recién salidos del horno.</span></p>
-      </div></article>
-      <article class="card"><div class="card-img"><img src="assets/concha.jpg" alt="Fresh conchas" /></div><div class="card-body">
-        <h3><span data-i18n-en>Conchas</span><span data-i18n-es>Conchas</span></h3>
-        <p><span data-i18n-en>Soft, fluffy, classic — the kind of concha you remember from home.</span><span data-i18n-es>Suaves, esponjosas, clásicas — las conchas que recuerdas de casa.</span></p>
-      </div></article>
-      <article class="card"><div class="card-img"><img src="assets/flan.jpg" alt="Traditional flan" /></div><div class="card-body">
-        <h3><span data-i18n-en>Traditional Flan</span><span data-i18n-es>Flan Tradicional</span></h3>
-        <p><span data-i18n-en>Creamy caramel custard — made the way abuela taught us.</span><span data-i18n-es>Cremoso flan de caramelo — hecho como nos enseñó la abuela.</span></p>
-      </div></article>
-      <article class="card"><div class="card-img"><img src="assets/jello.jpg" alt="Jello cups" /></div><div class="card-body">
-        <h3><span data-i18n-en>Gelatins &amp; Specials</span><span data-i18n-es>Gelatinas y Especiales</span></h3>
-        <p><span data-i18n-en>Milk gelatins in a variety of shapes and flavors.</span><span data-i18n-es>Gelatinas de leche en variedad de formas y sabores.</span></p>
-      </div></article>
-      <article class="card"><div class="card-img"><img src="assets/cookie.jpg" alt="Cookies" /></div><div class="card-body">
-        <h3><span data-i18n-en>Cookies</span><span data-i18n-es>Galletas</span></h3>
-        <p><span data-i18n-en>A wide assortment of fresh-baked cookies, every day.</span><span data-i18n-es>Gran variedad de galletas recién horneadas, todos los días.</span></p>
-      </div></article>
+    <div class="info-card">
+      <h3>Hours</h3><p>Open 7 days a week.</p>
+      <ul class="hours">
+        <li><span>Sunday</span><span>9 AM – 9 PM</span></li>
+        <li><span>Monday</span><span>9 AM – 9 PM</span></li>
+        <li><span>Tuesday</span><span>9 AM – 7 PM</span></li>
+        <li><span>Wednesday</span><span>9 AM – 7 PM</span></li>
+        <li><span>Thursday</span><span>9 AM – 8 PM</span></li>
+        <li><span>Friday</span><span>9 AM – 9 PM</span></li>
+        <li><span>Saturday</span><span>9 AM – 9 PM</span></li>
+      </ul>
     </div>
   </div>
-</section>
+</div></section>
+</main>
 
-<section class="why">
-  <div class="container">
-    <div class="section-head">
-      <span class="script"><span data-i18n-en>Why choose us</span><span data-i18n-es>Por qué elegirnos</span></span>
-      <h2><span data-i18n-en>Quality baking, exceptional service</span><span data-i18n-es>Calidad y servicio excepcional</span></h2>
-    </div>
-    <div class="why-grid">
-      <div class="why-card"><div class="icon-bubble">👨‍🍳</div>
-        <h3><span data-i18n-en>Traditional Recipes</span><span data-i18n-es>Recetas Tradicionales</span></h3>
-        <p><span data-i18n-en>Time-honored recipes crafted with skill and authenticity.</span><span data-i18n-es>Recetas de toda la vida elaboradas con maestría y autenticidad.</span></p>
-      </div>
-      <div class="why-card"><div class="icon-bubble">🏡</div>
-        <h3><span data-i18n-en>Community Favorite</span><span data-i18n-es>Favorito del Vecindario</span></h3>
-        <p><span data-i18n-en>Proudly serving Kent families and celebrations for years.</span><span data-i18n-es>Sirviendo con orgullo a las familias de Kent por años.</span></p>
-      </div>
-      <div class="why-card"><div class="icon-bubble">💛</div>
-        <h3><span data-i18n-en>Crafted with Care</span><span data-i18n-es>Hecho con Cariño</span></h3>
-        <p><span data-i18n-en>Every loaf and dessert reflects attention to detail.</span><span data-i18n-es>Cada pan y postre refleja atención al detalle.</span></p>
-      </div>
-    </div>
-  </div>
-</section>
-  
-<section id="story">
-  <div class="container story">
-    <img src="assets/zoom.jpg" alt="Inside our bakery" />
-    <div>
-      <span class="script"><span data-i18n-en>Our story</span><span data-i18n-es>Nuestra historia</span></span>
-      <h2><span data-i18n-en>Generations of baking, one neighborhood at a time.</span><span data-i18n-es>Generaciones horneando, un vecindario a la vez.</span></h2>
-      <p>
-        <span data-i18n-en>At Pasteleria Y Panaderia La Ideal 2, baking isn't just a craft — it's a family tradition. Every recipe carries the warmth of home kitchens and the love of feeding the people you care about.</span>
-        <span data-i18n-es>En Pastelería y Panadería La Ideal 2, hornear no es solo un oficio — es una tradición familiar. Cada receta lleva el calor de la cocina de casa y el amor de alimentar a los tuyos.</span>
-      </p>
-      <p>
-        <span data-i18n-en>We knead, shape, and bake everything by hand. Walk in and you'll smell it before you see it — fresh bread, melted butter, and a little bit of childhood.</span>
-        <span data-i18n-es>Amasamos, formamos y horneamos todo a mano. Al entrar lo olerás antes de verlo — pan recién hecho, mantequilla derretida y un toque de infancia.</span>
-      </p>
-    </div>
-  </div>
-</section>
-
-<section class="gallery">
-  <div class="container">
-    <div class="section-head">
-      <span class="script"><span data-i18n-en>From our oven</span><span data-i18n-es>Desde nuestro horno</span></span>
-      <h2><span data-i18n-en>A peek at what's in store</span><span data-i18n-es>Una probadita de lo que tenemos</span></h2>
-    </div>
-    <div class="gallery-grid">
-      <img src="assets/bread.jpg" alt="Fresh bread" loading="lazy" />
-      <img src="assets/bun.jpg" alt="Buns" loading="lazy" />
-      <img src="assets/buns.jpg" alt="Assorted buns" loading="lazy" />
-      <img src="assets/donut.jpg" alt="Donuts" loading="lazy" />
-      <img src="assets/puff.jpg" alt="Puff pastry" loading="lazy" />
-      <img src="assets/strudel.jpg" alt="Strudel" loading="lazy" />
-      <img src="assets/milkjello.jpg" alt="Milk gelatin" loading="lazy" />
-      <img src="assets/crossant.jpg" alt="Croissants" loading="lazy" />
-      <img src="assets/dough.jpg" alt="Dough" loading="lazy" />
-      <img src="assets/more.jpg" alt="More" loading="lazy" />
-      <img src="assets/overlook2.jpg" alt="Store" loading="lazy" />
-      <img src="assets/overlook3.jpg" alt="Store3" loading="lazy" />
-      <img src="assets/overlook4.jpg" alt="Store4" loading="lazy" />
-      <img src="assets/zoom.jpg" alt="Zoom" loading="lazy" />
-      <img src="assets/bunch.jpg" alt="Bunch" loading="lazy" />
-      <img src="assets/concha.jpg" alt="Concha" loading="lazy" />
-      <img src="assets/cookie.jpg" alt="Cookie" loading="lazy" />
-      <img src="assets/zoom.jpg" alt="Zoom" loading="lazy" />
-      <img src="assets/layered.jpg" alt="Layers" loading="lazy" />
-      <img src="assets/long.jpg" alt="long" loading="lazy" />
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <div class="section-head">
-      <span class="script"><span data-i18n-en>Kind words</span><span data-i18n-es>Lo que dicen</span></span>
-      <h2><span data-i18n-en>What our customers say</span><span data-i18n-es>Lo que dicen nuestros clientes</span></h2>
-    </div>
-    <div class="testi-grid">
-      <div class="testi"><div class="stars">★★★★★</div>
-        <p class="testi-quote">
-          <span data-i18n-en>"Bread is ALWAYS fresh and the options are endless! I have to limit myself because I want one of everything. Service is quick and they make sure your fresh bread doesn't get squished."</span>
-          <span data-i18n-es>"¡El pan SIEMPRE está fresco y las opciones son infinitas! Me tengo que limitar porque quiero uno de cada uno. El servicio es rápido y se aseguran de que tu pan llegue perfecto."</span>
-        </p>
-        <div class="testi-name">— Alondra M.</div>
-      </div>
-      <div class="testi"><div class="stars">★★★★★</div>
-        <p class="testi-quote">
-          <span data-i18n-en>"I've tried many Mexican bread shops and this one NEVER disappoints. The conchas are always soft and the bolillos are basically homemade white bread. 1000/10."</span>
-          <span data-i18n-es>"He probado muchas panaderías mexicanas y esta NUNCA decepciona. Las conchas siempre están suaves y los bolillos son como pan blanco casero. 1000/10."</span>
-        </p>
-        <div class="testi-name">— Bianca G.</div>
-      </div>
-      <div class="testi"><div class="stars">★★★★★</div>
-        <p class="testi-quote">
-          <span data-i18n-en>"Their bread is fresh and delicious. Cashiers are welcoming and quick. Best pan dulce and bolillos south of Seattle."</span>
-          <span data-i18n-es>"Su pan es fresco y delicioso. Las cajeras son amables y rápidas. El mejor pan dulce y bolillos al sur de Seattle."</span>
-        </p>
-        <div class="testi-name">— Dalia F.</div>
-      </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="visit" class="visit">
-  <div class="container">
-    <div class="section-head">
-      <span class="script"><span data-i18n-en>Come say hello</span><span data-i18n-es>Ven a saludarnos</span></span>
-      <h2><span data-i18n-en>Visit our bakery</span><span data-i18n-es>Visita nuestra panadería</span></h2>
-      <p style="color:#e8d5b8">
-        <span data-i18n-en>We'd love to bake for you — stop in or give us a call.</span>
-        <span data-i18n-es>Nos encantaría hornear para ti — pásate o llámanos.</span>
-      </p>
-    </div>
-    <div class="visit-grid">
-      <div class="info-card"><div class="icon-bubble">📍</div>
-        <h3><span data-i18n-en>Location</span><span data-i18n-es>Ubicación</span></h3>
-        <p>26112 Pacific Hwy S<br/>Kent, WA 98032</p>
-      </div>
-      <div class="info-card"><div class="icon-bubble">🕒</div>
-        <h3><span data-i18n-en>Hours</span><span data-i18n-es>Horario</span></h3>
-        <p><span data-i18n-en>Open Daily At 8 AM · Closes 9 PM</span><span data-i18n-es>Abierto Todos los Días 8 AM · Cierra 9 PM</span></p>
-      </div>
-      <div class="info-card"><div class="icon-bubble">📞</div>
-        <h3><span data-i18n-en>Call Us</span><span data-i18n-es>Llámanos</span></h3>
-        <p>(206) 651-7514</p>
-      </div>
-    </div>
-    <div class="call-cta">
-      <a href="tel:+12066517514" class="btn">📞 <span data-i18n-en>Call For More Details</span><span data-i18n-es>Llame para más detalles</span></a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <span class="brand">Pasteleria Y Panaderia La Ideal 2</span>
-  <span data-i18n-en>Baked fresh daily with love.</span>
-  <span data-i18n-es>Horneado fresco cada día con amor.</span>
-  © <span id="y"></span> · 26112 Pacific Hwy S, Kent, WA 98032 · (206) 651-7514
-</footer>
-
-<script>
-  document.getElementById('y').textContent = new Date().getFullYear();
-  const buttons = document.querySelectorAll('.lang-toggle button');
-  const setLang = (lang) => {
-    document.documentElement.lang = lang;
-    buttons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-    try { localStorage.setItem('laideal-lang', lang); } catch(e){}
-  };
-  buttons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
-  let saved = null;
-  try { saved = localStorage.getItem('laideal-lang'); } catch(e){}
-  const initial = saved || ((navigator.language || 'en').toLowerCase().startsWith('es') ? 'es' : 'en');
-  setLang(initial);
-</script>
+<footer><div class="container">
+  <div class="brand brand-footer"><div class="brand-mark"></div> Bellas Artes Bakery</div>
+  <p>29314 Pacific Hwy S #101A, Federal Way, WA · (253) 946-0133</p>
+  <p class="small">© Bellas Artes Bakery. Baked with love every day.</p>
+</div></footer>
 </body>
 </html>
