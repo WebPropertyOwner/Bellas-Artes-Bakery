@@ -1,429 +1,500 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "framer-motion";
-import {
-  Phone, MapPin, Mail, Clock, Heart, Sparkles, Users, Wheat,
-  Cake, Cookie, Croissant, Star, ChefHat, Award, Send, Facebook, Instagram,
-} from "lucide-react";
-import { useState } from "react";
-import hero from "@/assets/variety.jpg";
-import bread from "@/assets/crossant.jpg";
-import cake from "@/assets/cakes.jpg";
-import pastries from "@/assets/layered.jpg";
-import cookies from "@/assets/cookie.jpg";
-import mexican from "@/assets/concha.jpg";
-import seasonal from "@/assets/flan.jpg";
-import about from "@/assets/about.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Pasteleria Y Panaderia La Ideal 2 — Freshly Baked Every Day" },
-      { name: "description", content: "Authentic bakery in your neighborhood: fresh breads, pastries, cakes, cookies, and traditional Mexican baked goods made daily with love." },
-      { property: "og:title", content: "Pasteleria Y Panaderia La Ideal 2" },
-      { property: "og:description", content: "Freshly baked breads, pastries, and cakes made daily with quality ingredients and generations of tradition." },
+      { title: "Bellas Artes Bakery — Pan Dulce & Custom Cakes in Federal Way, WA" },
+      {
+        name: "description",
+        content:
+          "Bellas Artes Bakery in Federal Way, WA. Pan dulce, wedding & birthday cakes, tres leches, empanadas, conchas and traditional Mexican baked goods made fresh daily.",
+      },
+      { property: "og:title", content: "Bellas Artes Bakery" },
+      {
+        property: "og:description",
+        content:
+          "Traditional Mexican bakery in Federal Way, WA — pan dulce, custom cakes, tres leches and more, baked fresh every day.",
+      },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,800;1,500&family=Inter:wght@400;500;600&display=swap",
+      },
+    ],
   }),
-  component: Index,
+  component: BakeryLanding,
 });
 
-const fadeUp = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-80px" },
-  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
-};
+type Item = { name: string; price?: string; desc?: string };
+type Category = { title: string; items: Item[] };
 
-const products = [
-  { img: bread, name: "Fresh Bread", desc: "Crusty artisan loaves baked through the night for that perfect morning slice." },
-  { img: cake, name: "Cakes & Custom Cakes", desc: "Celebration cakes hand-decorated for birthdays, weddings, and everyday joy." },
-  { img: pastries, name: "Sweet Pastries", desc: "Buttery, flaky, golden — danishes, tarts, and croissants straight from the oven." },
-  { img: cookies, name: "Cookies", desc: "Chewy, crisp, generously studded — the kind of cookie you remember." },
-  { img: mexican, name: "Traditional Mexican Bread", desc: "Conchas, orejas, and pan dulce made the way abuela taught us." },
-  { img: seasonal, name: "Seasonal Specials", desc: "Rosca de Reyes, pan de muerto, holiday loaves — a taste for every season." },
+const CATEGORIES: Category[] = [
+  {
+    title: "Pan Dulce",
+    items: [
+      { name: "White Concha", price: "$1.50" },
+      { name: "Pink Concha", price: "$1.50" },
+      { name: "Chocolate Concha", price: "$1.50" },
+      { name: "Yellow Concha", price: "$1.50" },
+      { name: "Mantecada", price: "$1.99" },
+      { name: "Ojo De Buey", price: "$2.50" },
+      { name: "Niño Embuelto", price: "$2.00" },
+    ],
+  },
+  {
+    title: "Puff Pastry Empanadas De Ojaldre",
+    items: [
+      { name: "Raspberry", price: "$2.99" },
+      { name: "Lemon", price: "$2.99" },
+      { name: "Apple", price: "$2.99" },
+      { name: "Dulce De Leche", price: "$2.99" },
+    ],
+  },
+  {
+    title: "Empanadas",
+    items: [
+      { name: "Bavarian Cream with Sugar", price: "$1.99" },
+      { name: "Strawberry", price: "$1.99" },
+      { name: "Pineapple", price: "$1.99" },
+    ],
+  },
+  {
+    title: "Pan De Feite",
+    items: [
+      { name: "Almoada", price: "$1.99" },
+      { name: "Laurel", price: "$1.99" },
+      { name: "Bavarian Cream Cono", price: "$1.99" },
+      { name: "Oreja", price: "$1.99" },
+      { name: "Broca", price: "$1.99" },
+      { name: "Strawberry Cuadro", price: "$1.99" },
+      { name: "Pineapple Cuadro", price: "$1.99" },
+    ],
+  },
+  {
+    title: "Rosca de Reyes",
+    items: [
+      {
+        name: "Rosca De Reyes — Small",
+        price: "$27.00",
+        desc: "Traditional crown-shaped sweet bread for Día de los Reyes Magos. Hidden figurine inside (not edible — remove before eating).",
+      },
+      {
+        name: "Rosca De Reyes — Medium",
+        price: "$45.00",
+        desc: "Decorated with candied fruits. Finder of the figurine hosts a tamale party on Candlemas (Feb 2nd).",
+      },
+      {
+        name: "Rosca De Reyes — Large",
+        price: "$65.00",
+        desc: "Our largest crown — perfect for big family gatherings on January 6th.",
+      },
+    ],
+  },
+  {
+    title: "Cheesecake",
+    items: [
+      { name: "Mex Style Cheesecake Slice", price: "$3.99" },
+      { name: "Chocolate / Strawberry Cheesecake Slice", price: "$3.99" },
+    ],
+  },
+  {
+    title: "Tres Leches Slice",
+    items: [
+      { name: "Walnuts", price: "$4.99" },
+      { name: "Bavarian Cream", price: "$4.99" },
+      { name: "Pineapple", price: "$4.99" },
+      { name: "Guava", price: "$4.99" },
+      { name: "Strawberry", price: "$4.99" },
+      { name: "Dulce De Leche", price: "$4.99" },
+      { name: "Raspberry", price: "$4.99" },
+      { name: "Coconut", price: "$4.99" },
+    ],
+  },
+  {
+    title: "Galletas — Cookies",
+    items: [
+      { name: "Polvaron Sevellano Multicolor", price: "$1.50" },
+      { name: "Tri Color Polvaron", price: "$1.50" },
+      { name: "Yellow Polvaron", price: "$1.50" },
+      { name: "Pink Polvaron", price: "$1.50" },
+      { name: "Peanut Butter Polvaron", price: "$1.50" },
+      { name: "Yellow Flower", price: "$1.50" },
+      { name: "Pink Flower", price: "$1.50" },
+      { name: "Blue Flower", price: "$1.50" },
+      { name: "White Flower", price: "$1.50" },
+      { name: "Happy Face Cookie", price: "$1.50" },
+      { name: "Sprinkles Cookie", price: "$1.50" },
+      { name: "Cinnamon Heart", price: "$1.50" },
+    ],
+  },
 ];
 
-const reasons = [
-  { icon: Sparkles, title: "Fresh Daily", text: "Every item is baked fresh to ensure the best flavor and quality." },
-  { icon: ChefHat, title: "Authentic Recipes", text: "Traditional recipes passed down through generations." },
-  { icon: Heart, title: "Friendly Service", text: "Welcoming staff committed to making every visit special." },
-  { icon: Wheat, title: "Quality Ingredients", text: "Only carefully selected ingredients go into every recipe." },
-  { icon: Users, title: "Community Favorite", text: "Proudly serving local families and celebrations." },
-  { icon: Award, title: "Made With Love", text: "Every loaf, pastry, and cake receives personal attention." },
+const HIGHLIGHTS = [
+  { badge: "Popular", emoji: "🥖", title: "Pan", desc: "Daily-baked breads, warm from the oven.", color: "var(--pink)" },
+  { badge: "Popular", emoji: "💍", title: "Wedding Cake", desc: "Tiered showstoppers designed with you.", color: "var(--butter)" },
+  { badge: "Birthday", emoji: "🎉", title: "½ Sheet Birthday Cake", desc: "Custom flavors and themes for the big day.", color: "var(--mint)" },
+  { badge: "Custom", emoji: "🎂", title: "2-Tier & Bridal Cakes", desc: "Elegant tiered cakes made to order.", color: "var(--lilac)" },
 ];
 
-const menuItems = [
-  { name: "Breakfast Pastries", price: "from $1.50" },
-  { name: "Fresh Bread", price: "from $3.00" },
-  { name: "Cookies", price: "from $0.75" },
-  { name: "Cakes", price: "from $24.00" },
-  { name: "Traditional Mexican Pastries", price: "from $1.25" },
-  { name: "Holiday Specials", price: "seasonal" },
+const REVIEWS = [
+  {
+    initial: "R",
+    name: "Rarest Beauty",
+    meta: "3 reviews · 10 months ago",
+    text: "We are extremely happy with our wedding cake from here. Before going to this shop, we visited and researched many other cake places and were very disappointed by the prices. Other places charged a hefty price for a tiny cake.",
+  },
+  {
+    initial: "D",
+    name: "dzein kaeral",
+    meta: "Local Guide · 1 year ago",
+    text: "Went there for the 1st time for my birthday cake and the cake was perfect. So moist and yummy. My family and friends can't stop talking about it. Just the right amount of sweetness, and very affordable.",
+  },
+  {
+    initial: "C",
+    name: "Crysss",
+    meta: "Local Guide · 8 months ago",
+    text: "Great place for cakes and desserts! Been here for years! Wouldn't trust any other bakery — this is the best one for me.",
+  },
+  {
+    initial: "A",
+    name: "Angellina Medina",
+    meta: "Local Guide · 2 years ago",
+    text: "If you're looking for something sweet and cheap, I really recommend coming here and grabbing some pan dulce. So many to choose from and literally so good and so inexpensive.",
+  },
+  {
+    initial: "V",
+    name: "Vonda Walkama",
+    meta: "6 reviews · 3 years ago",
+    text: "They did an amazing job on this cake and it was delicious 😋 — it looks exactly like the picture we asked for and they are not overly priced. We will use this bakery again for future cakes.",
+  },
 ];
 
-const testimonials = [
-  { quote: "The pastries are always fresh and absolutely delicious. My family comes here every week.", name: "Maria G." },
-  { quote: "Beautiful cakes, friendly service, and amazing bread. Highly recommended.", name: "Jonathan R." },
-  { quote: "This bakery reminds me of home. Everything tastes authentic and freshly made.", name: "Elena S." },
-];
+const HOURS = [
+  ["Sunday", "9 AM – 9 PM"],
+  ["Monday", "9 AM – 9 PM"],
+  ["Tuesday", "9 AM – 7 PM"],
+  ["Wednesday", "9 AM – 7 PM"],
+  ["Thursday", "9 AM – 8 PM"],
+  ["Friday", "9 AM – 9 PM"],
+  ["Saturday", "9 AM – 9 PM"],
+] as const;
 
-function Index() {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
-  const [sent, setSent] = useState(false);
-
+function BakeryLanding() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
-      <Nav />
-
-      {/* HERO */}
-      <section id="home" className="relative isolate min-h-[100svh] w-full overflow-hidden">
-        <img src={hero} alt="Fresh pastries, breads and cakes on display" width={1920} height={1080}
-          className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0" style={{ backgroundImage: "var(--gradient-hero)" }} />
-        <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-6xl flex-col items-start justify-end px-6 pb-20 pt-32 sm:pb-28">
-          <motion.div {...fadeUp} className="flex flex-wrap gap-2">
-            <Badge>🥐 Fresh Daily</Badge>
-            <Badge>👨‍🍳 Family-Owned</Badge>
-            <Badge>⭐ Customer Favorite</Badge>
-          </motion.div>
-          <motion.h1 {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.1 }}
-            className="mt-6 max-w-3xl text-5xl font-semibold leading-[1.05] text-white sm:text-7xl">
-            Freshly Baked <span className="font-script text-[var(--rose)]">Every Day</span>
-          </motion.h1>
-          <motion.p {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.2 }}
-            className="mt-5 max-w-xl text-base text-white/90 sm:text-lg">
-            Discover delicious breads, pastries, cakes, cookies, and traditional baked goods made fresh daily with quality ingredients and generations of baking tradition.
-          </motion.p>
-          <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.3 }}
-            className="mt-8 flex flex-wrap gap-3">
-            <a href="#contact" className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-lift transition hover:-translate-y-0.5 hover:bg-primary/90 sm:text-base">
-              <MapPin className="h-4 w-4" /> Visit Our Bakery
-            </a>
-            <a href="tel:+10000000000" className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20 sm:text-base">
-              <Phone className="h-4 w-4" /> Call Now
-            </a>
-          </motion.div>
-        </div>
-
-        {/* floating decor */}
-        <FloatingBlob className="left-[-6rem] top-24 h-72 w-72 bg-[var(--rose)]/30" />
-        <FloatingBlob className="right-[-4rem] bottom-10 h-64 w-64 bg-[var(--caramel)]/30" />
-      </section>
-
-      {/* PRODUCTS */}
-      <section id="products" className="relative py-24 sm:py-32">
-        <SectionHeader kicker="Our Menu" title="Our Freshly Baked Favorites"
-          sub="A handpicked selection of what comes out of our oven, warm and ready, every morning." />
-        <div className="mx-auto mt-16 grid max-w-6xl grid-cols-1 gap-8 px-6 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((p, i) => (
-            <motion.article key={p.name} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.05 }}
-              className="group overflow-hidden rounded-3xl bg-card shadow-soft transition hover:-translate-y-1 hover:shadow-lift">
-              <div className="aspect-[4/3] overflow-hidden">
-                <img src={p.img} alt={p.name} loading="lazy" width={800} height={600}
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-2xl">{p.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
-                <button className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary transition group-hover:gap-2">
-                  Learn more <span aria-hidden>→</span>
-                </button>
-              </div>
-            </motion.article>
-          ))}
-        </div>
-      </section>
-
-      {/* WHY */}
-      <section id="why" className="relative bg-gradient-warm py-24 sm:py-32">
-        <SectionHeader kicker="Why Us" title="Why Choose La Ideal?"
-          sub="Six small reasons that add up to one warm loaf at a time." />
-        <div className="mx-auto mt-16 grid max-w-6xl grid-cols-1 gap-6 px-6 sm:grid-cols-2 lg:grid-cols-3">
-          {reasons.map((r, i) => (
-            <motion.div key={r.title} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.05 }}
-              className="rounded-3xl border border-border/60 bg-card/80 p-7 shadow-soft backdrop-blur-sm transition hover:-translate-y-1">
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--rose)]/40 text-primary">
-                <r.icon className="h-6 w-6" />
-              </div>
-              <h3 className="mt-5 text-xl">{r.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{r.text}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* ABOUT */}
-      <section id="about" className="py-24 sm:py-32">
-        <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-2">
-          <motion.div {...fadeUp} className="relative">
-            <img src={about} alt="Our bakery interior" loading="lazy" width={1200} height={1200}
-              className="aspect-square w-full rounded-3xl object-cover shadow-lift" />
-            <div className="absolute -bottom-6 -right-6 hidden rounded-2xl bg-card px-6 py-4 shadow-lift sm:block">
-              <p className="font-script text-3xl text-primary">Since day one</p>
-              <p className="text-xs text-muted-foreground">Baking from the heart</p>
+    <>
+      <style>{css}</style>
+      <div className="bakery">
+        <header className="nav">
+          <div className="nav-inner">
+            <div className="brand">
+              <div className="brand-mark" />
+              Bellas Artes Bakery
             </div>
-          </motion.div>
-          <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.15 }}>
-            <p className="font-script text-2xl text-[var(--caramel)]">Our Story</p>
-            <h2 className="mt-2 text-4xl sm:text-5xl">A neighborhood bakery, made with love.</h2>
-            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-              Pasteleria Y Panaderia La Ideal 2 is dedicated to bringing fresh baked goods, traditional flavors, and exceptional customer service to the community. From morning pastries to celebration cakes, every product is crafted with care, passion, and a commitment to quality.
-            </p>
-            <blockquote className="mt-8 border-l-4 border-[var(--rose)] bg-secondary/40 p-6 italic text-foreground/80 rounded-r-2xl">
-              "To create memorable moments through fresh, delicious baked goods that bring people together."
-            </blockquote>
-          </motion.div>
-        </div>
-      </section>
+            <ul>
+              <li><a href="#menu">Menu</a></li>
+              <li><a href="#reviews">Reviews</a></li>
+              <li><a href="#visit">Visit</a></li>
+            </ul>
+            <a className="btn btn-primary" href="tel:+12539460133">Call (253) 946-0133</a>
+          </div>
+        </header>
 
-      {/* TESTIMONIALS */}
-      <section className="bg-secondary/30 py-24 sm:py-32">
-        <SectionHeader kicker="Kind Words" title="What Our Customers Are Saying" />
-        <div className="mx-auto mt-14 grid max-w-6xl grid-cols-1 gap-6 px-6 md:grid-cols-3">
-          {testimonials.map((t, i) => (
-            <motion.figure key={t.name} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.08 }}
-              className="flex flex-col rounded-3xl bg-card p-8 shadow-soft">
-              <div className="flex gap-0.5 text-[var(--caramel)]">
-                {Array.from({ length: 5 }).map((_, j) => <Star key={j} className="h-4 w-4 fill-current" />)}
+        <main>
+          <section className="hero">
+            <div className="container hero-grid">
+              <div>
+                <span className="eyebrow">Federal Way, WA · Family-owned</span>
+                <h1>Pan dulce, cakes &amp; sweet little moments.</h1>
+                <p className="lead">
+                  Traditional Mexican baked goods, custom celebration cakes, and trays of warm
+                  pan dulce baked fresh every day at Bellas Artes Bakery.
+                </p>
+                <div className="hero-cta">
+                  <a className="btn btn-primary" href="#menu">See the menu</a>
+                  <a className="btn btn-ghost" href="#visit">Visit the bakery</a>
+                </div>
+                <div className="hero-stats">
+                  <div><span>★ 4.8</span><small>Loved on Google</small></div>
+                  <div><span>40+</span><small>Items daily</small></div>
+                  <div><span>9–9</span><small>Open late</small></div>
+                </div>
               </div>
-              <blockquote className="mt-4 flex-1 text-base leading-relaxed text-foreground/80">"{t.quote}"</blockquote>
-              <figcaption className="mt-6 font-semibold">— {t.name}</figcaption>
-            </motion.figure>
-          ))}
-        </div>
-      </section>
-
-      {/* MENU PREVIEW */}
-      <section id="menu" className="py-24 sm:py-32">
-        <SectionHeader kicker="On the Counter" title="Something For Everyone"
-          sub="A peek at what fills our cases — pricing starts here, but the smell is free." />
-        <div className="mx-auto mt-14 grid max-w-6xl grid-cols-2 gap-3 px-6 sm:gap-4 md:grid-cols-3">
-          {menuItems.map((m, i) => (
-            <motion.div key={m.name} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.05 }}
-              className="group relative aspect-square overflow-hidden rounded-3xl bg-card shadow-soft">
-              <img src={products[i].img} alt={m.name} loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-5 text-white">
-                <h3 className="text-lg sm:text-xl">{m.name}</h3>
-                <p className="text-xs text-white/80">{m.price}</p>
+              <div className="hero-art" aria-hidden="true">
+                <div className="hero-emoji">🎂</div>
               </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* SERVICE AREA */}
-      <section className="bg-gradient-warm py-24 sm:py-32">
-        <div className="mx-auto max-w-6xl px-6">
-          <SectionHeader kicker="Local & Loved" title="Proudly Serving Our Community" />
-          <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-2">
-            <div className="aspect-[4/3] overflow-hidden rounded-3xl border border-border bg-card shadow-soft">
-              <iframe title="Bakery location" className="h-full w-full" loading="lazy"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=-99.20%2C19.40%2C-99.10%2C19.45&layer=mapnik" />
             </div>
-            <div className="grid gap-4 self-center">
-              {[
-                { icon: MapPin, title: "Local Area Coverage", text: "Serving families across the neighborhood and surrounding districts." },
-                { icon: Croissant, title: "In-Store Pickup", text: "Walk in, smell the bread, leave with a warm bag." },
-                { icon: Cake, title: "Custom Orders", text: "Birthdays, weddings, quinceañeras — call us 48 hours ahead." },
-              ].map((c) => (
-                <div key={c.title} className="flex gap-4 rounded-2xl bg-card/80 p-5 shadow-soft backdrop-blur-sm">
-                  <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[var(--rose)]/40 text-primary">
-                    <c.icon className="h-6 w-6" />
+          </section>
+
+          <section id="highlights">
+            <div className="container">
+              <div className="section-head">
+                <h2>Menu highlights</h2>
+                <p>A few of our most-loved bakes — pulled straight off the trays.</p>
+              </div>
+              <div className="highlights">
+                {HIGHLIGHTS.map((h, i) => (
+                  <div className="hl" key={h.title} style={{ ["--hl-color" as never]: h.color } as React.CSSProperties}>
+                    <span className="badge">{h.badge}</span>
+                    <span className="emoji">{h.emoji}</span>
+                    <h3>{h.title}</h3>
+                    <p>{h.desc}</p>
+                    <span className="hl-bar" aria-hidden="true" data-i={i} />
                   </div>
-                  <div className="min-w-0">
-                    <h3 className="text-lg">{c.title}</h3>
-                    <p className="text-sm text-muted-foreground">{c.text}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      {/* CONTACT */}
-      <section id="contact" className="py-24 sm:py-32">
-        <SectionHeader kicker="Say Hello" title="Visit Us Today"
-          sub="Drop in for warm bread, or send a note — we love hearing from neighbors." />
-        <div className="mx-auto mt-14 grid max-w-6xl grid-cols-1 gap-10 px-6 lg:grid-cols-2">
-          <div className="space-y-5">
-            {[
-              { icon: MapPin, title: "Address", text: "123 Main Street, Your City, ST 00000" },
-              { icon: Phone, title: "Phone", text: "(555) 123-4567" },
-              { icon: Mail, title: "Email", text: "hello@laideal2.com" },
-              { icon: Clock, title: "Hours", text: "Monday – Sunday · 6:00 AM – 9:00 PM" },
-            ].map((c) => (
-              <div key={c.title} className="flex gap-4 rounded-2xl border border-border bg-card p-5 shadow-soft">
-                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[var(--rose)]/40 text-primary">
-                  <c.icon className="h-5 w-5" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-xs uppercase tracking-wider text-muted-foreground">{c.title}</p>
-                  <p className="mt-1 text-base font-medium">{c.text}</p>
+          <section id="menu" style={{ paddingTop: 0 }}>
+            <div className="container">
+              <div className="section-head">
+                <h2>Full menu</h2>
+                <p>Pan dulce, specialties, cookies and more.</p>
+              </div>
+              <div className="menu-wrap">
+                <div className="menu-source">Provided by DoorDash · updated less than a day ago</div>
+                <div className="menu-grid">
+                  {CATEGORIES.map((cat) => (
+                    <div className="menu-cat" key={cat.title}>
+                      <h3>{cat.title}</h3>
+                      {cat.items.map((item) => (
+                        <div className="menu-item" key={item.name}>
+                          <div>
+                            <span className="name">{item.name}</span>
+                            {item.desc && <span className="desc">{item.desc}</span>}
+                          </div>
+                          {item.price && <span className="price">{item.price}</span>}
+                        </div>
+                      ))}
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
-
-          <form onSubmit={(e) => { e.preventDefault(); setSent(true); }}
-            className="rounded-3xl border border-border bg-card p-8 shadow-lift">
-            <div className="grid gap-4">
-              {[
-                { k: "name", label: "Name", type: "text" },
-                { k: "email", label: "Email", type: "email" },
-                { k: "phone", label: "Phone", type: "tel" },
-              ].map((f) => (
-                <label key={f.k} className="block">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{f.label}</span>
-                  <input required type={f.type} value={(form as any)[f.k]}
-                    onChange={(e) => setForm({ ...form, [f.k]: e.target.value })}
-                    className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-3 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20" />
-                </label>
-              ))}
-              <label className="block">
-                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Message</span>
-                <textarea required rows={4} value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  className="mt-2 w-full resize-none rounded-xl border border-input bg-background px-4 py-3 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20" />
-              </label>
-              <button type="submit"
-                className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 font-semibold text-primary-foreground shadow-soft transition hover:-translate-y-0.5 hover:bg-primary/90">
-                {sent ? "Thanks! We'll be in touch." : (<><Send className="h-4 w-4" /> Send Message</>)}
-              </button>
             </div>
-          </form>
-        </div>
-      </section>
+          </section>
 
-      <Footer />
-    </div>
-  );
-}
+          <section id="reviews" className="reviews">
+            <div className="container">
+              <div className="section-head">
+                <h2>What guests are saying</h2>
+                <p>From wedding cakes to a quick concha on the way home.</p>
+              </div>
+              <div className="reviews-grid">
+                {REVIEWS.map((r) => (
+                  <div className="review" key={r.name}>
+                    <div className="stars">★★★★★</div>
+                    <p>"{r.text}"</p>
+                    <div className="who">
+                      <div className="avatar">{r.initial}</div>
+                      <div>
+                        <strong>{r.name}</strong>
+                        <small>{r.meta}</small>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                <div className="review review-feature">
+                  <div className="stars">★★★★★</div>
+                  <p className="feature-quote">
+                    "The best pan dulce in Federal Way — and the kindest people behind the counter."
+                  </p>
+                  <div className="who">
+                    <div className="avatar avatar-rose">♡</div>
+                    <div>
+                      <strong>Neighborhood favorite</strong>
+                      <small>Bellas Artes regulars</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
-function Nav() {
-  const [open, setOpen] = useState(false);
-  const links = [
-    { href: "#products", label: "Menu" },
-    { href: "#why", label: "Why Us" },
-    { href: "#about", label: "Our Story" },
-    { href: "#contact", label: "Visit" },
-  ];
-  return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      <div className="mx-auto mt-4 flex max-w-6xl items-center justify-between rounded-full border border-border/60 bg-background/70 px-5 py-3 shadow-soft backdrop-blur-xl sm:mx-6 sm:px-6">
-        <a href="#home" className="flex min-w-0 items-center gap-2">
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground">
-            <Cookie className="h-4 w-4" />
-          </span>
-          <span className="truncate font-display text-lg font-semibold sm:text-xl">La Ideal 2</span>
-        </a>
-        <nav className="hidden items-center gap-8 md:flex">
-          {links.map((l) => (
-            <a key={l.href} href={l.href}
-              className="text-sm font-medium text-foreground/70 transition hover:text-primary">{l.label}</a>
-          ))}
-        </nav>
-        <a href="tel:+10000000000"
-          className="hidden items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90 sm:inline-flex">
-          <Phone className="h-4 w-4" /> Call
-        </a>
-        <button onClick={() => setOpen(!open)} aria-label="Menu" className="md:hidden">
-          <span className="block h-0.5 w-6 bg-foreground" />
-          <span className="mt-1.5 block h-0.5 w-6 bg-foreground" />
-        </button>
-      </div>
-      {open && (
-        <div className="mx-6 mt-2 rounded-2xl border border-border bg-background/95 p-4 shadow-lift backdrop-blur md:hidden">
-          {links.map((l) => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)}
-              className="block py-2 text-sm font-medium">{l.label}</a>
-          ))}
-        </div>
-      )}
-    </header>
-  );
-}
+          <section id="visit">
+            <div className="container">
+              <div className="section-head">
+                <h2>Visit the bakery</h2>
+                <p>Stop by for a tray of warm pan dulce or to talk about your next custom cake.</p>
+              </div>
+              <div className="visit-grid">
+                <div className="info-card">
+                  <h3>Find us</h3>
+                  <div className="contact-line">
+                    <div className="ic">📍</div>
+                    <div>
+                      <strong>Address</strong>
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=29314+Pacific+Hwy+S+101A+Federal+Way+WA+98003"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        29314 Pacific Hwy S #101A
+                        <br />
+                        Federal Way, WA 98003
+                      </a>
+                    </div>
+                  </div>
+                  <div className="contact-line">
+                    <div className="ic">📞</div>
+                    <div>
+                      <strong>Phone</strong>
+                      <a href="tel:+12539460133">(253) 946-0133</a>
+                    </div>
+                  </div>
+                  <div className="contact-line">
+                    <div className="ic">🎂</div>
+                    <div>
+                      <strong>Custom cakes</strong>
+                      Call ahead for wedding, birthday, and bridal cakes — we love a good project.
+                    </div>
+                  </div>
+                </div>
+                <div className="info-card">
+                  <h3>Hours</h3>
+                  <p>Open 7 days a week.</p>
+                  <ul className="hours">
+                    {HOURS.map(([day, time]) => (
+                      <li key={day}>
+                        <span>{day}</span>
+                        <span>{time}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
 
-function Footer() {
-  return (
-    <footer className="border-t border-border bg-primary/95 text-primary-foreground">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-16 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-[var(--rose)]/30">
-              <Cookie className="h-5 w-5" />
-            </span>
-            <span className="font-display text-xl font-semibold">La Ideal 2</span>
+        <footer>
+          <div className="container">
+            <div className="brand brand-footer">
+              <div className="brand-mark" /> Bellas Artes Bakery
+            </div>
+            <p>29314 Pacific Hwy S #101A, Federal Way, WA · (253) 946-0133</p>
+            <p className="small">© Bellas Artes Bakery. Baked with love every day.</p>
           </div>
-          <p className="mt-4 text-sm opacity-80">Freshly baked, every day. Made with love for our community.</p>
-        </div>
-        <div>
-          <h4 className="text-sm font-semibold uppercase tracking-wider">Quick Links</h4>
-          <ul className="mt-4 space-y-2 text-sm opacity-80">
-            <li><a href="#products" className="hover:opacity-100">Menu</a></li>
-            <li><a href="#why" className="hover:opacity-100">Why Us</a></li>
-            <li><a href="#about" className="hover:opacity-100">Our Story</a></li>
-            <li><a href="#contact" className="hover:opacity-100">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-sm font-semibold uppercase tracking-wider">Contact</h4>
-          <ul className="mt-4 space-y-2 text-sm opacity-80">
-            <li>123 Main Street</li>
-            <li>(555) 123-4567</li>
-            <li>hello@laideal2.com</li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-sm font-semibold uppercase tracking-wider">Follow</h4>
-          <div className="mt-4 flex gap-3">
-            <a href="#" aria-label="Facebook" className="grid h-10 w-10 place-items-center rounded-full bg-white/10 transition hover:bg-white/20"><Facebook className="h-4 w-4" /></a>
-            <a href="#" aria-label="Instagram" className="grid h-10 w-10 place-items-center rounded-full bg-white/10 transition hover:bg-white/20"><Instagram className="h-4 w-4" /></a>
-          </div>
-        </div>
+        </footer>
       </div>
-      <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 py-6 text-xs opacity-70 sm:flex-row">
-          <p>© {new Date().getFullYear()} Pasteleria Y Panaderia La Ideal 2. All rights reserved.</p>
-          <div className="flex gap-4">
-            <a href="#" className="hover:opacity-100">Privacy Policy</a>
-            <a href="#" className="hover:opacity-100">Terms of Service</a>
-          </div>
-        </div>
-      </div>
-    </footer>
+    </>
   );
 }
 
-function SectionHeader({ kicker, title, sub }: { kicker: string; title: string; sub?: string }) {
-  return (
-    <div className="mx-auto max-w-2xl px-6 text-center">
-      <motion.p {...fadeUp} className="font-script text-2xl text-[var(--caramel)]">{kicker}</motion.p>
-      <motion.h2 {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.08 }}
-        className="mt-2 text-4xl sm:text-5xl">{title}</motion.h2>
-      {sub && <motion.p {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.15 }}
-        className="mt-4 text-base text-muted-foreground">{sub}</motion.p>}
-    </div>
-  );
+const css = `
+.bakery{
+  --cream:#fff7ee;
+  --blush:#fde2e4;
+  --pink:#f7c5cc;
+  --rose:#e8889a;
+  --rose-deep:#b85c6f;
+  --mint:#cdeac0;
+  --butter:#ffe9b0;
+  --lilac:#e2d4f0;
+  --ink:#3b2a2f;
+  --muted:#7a6b6f;
+  --line:rgba(59,42,47,.10);
+  --shadow:0 10px 30px rgba(184,92,111,.12);
+  --radius:18px;
+  font-family:'Inter',system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
 }
+.bakery *{box-sizing:border-box}
+.bakery h1,.bakery h2,.bakery h3,.bakery h4{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.01em;margin:0 0 .4em}
+.bakery h1{font-size:clamp(2.4rem,5vw,4.2rem);line-height:1.05;font-weight:800}
+.bakery h2{font-size:clamp(1.8rem,3vw,2.6rem)}
+.bakery h3{font-size:1.25rem}
+.bakery p{margin:0 0 1em}
+.bakery a{color:var(--rose-deep);text-decoration:none}
+.bakery a:hover{text-decoration:underline}
+.bakery .container{max-width:1160px;margin:0 auto;padding:0 24px}
 
-function Badge({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="inline-flex items-center rounded-full border border-white/30 bg-white/15 px-3 py-1 text-xs font-medium text-white backdrop-blur">
-      {children}
-    </span>
-  );
-}
+.bakery .nav{position:sticky;top:0;z-index:50;background:rgba(255,247,238,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bakery .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px;max-width:1160px;margin:0 auto}
+.bakery .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:700;font-size:1.15rem}
+.bakery .brand-mark{width:36px;height:36px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,var(--pink) 60%,var(--rose));box-shadow:var(--shadow)}
+.bakery .nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;font-size:.95rem}
+.bakery .nav ul a{color:var(--ink)}
+.bakery .btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:600;font-size:.95rem;transition:transform .15s ease,box-shadow .15s ease;cursor:pointer}
+.bakery .btn-primary{background:var(--rose-deep);color:#fff}
+.bakery .btn-primary:hover{transform:translateY(-1px);box-shadow:var(--shadow);text-decoration:none}
+.bakery .btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+@media(max-width:780px){ .bakery .nav ul{display:none} }
 
-function FloatingBlob({ className }: { className: string }) {
-  return (
-    <motion.div aria-hidden
-      animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
-      transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-      className={`pointer-events-none absolute -z-0 rounded-full blur-3xl ${className}`} />
-  );
-}
+.bakery .hero{padding:80px 0 90px;position:relative;overflow:hidden}
+.bakery .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+.bakery .eyebrow{display:inline-block;background:var(--lilac);color:#5a3f7a;padding:6px 14px;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px}
+.bakery .hero p.lead{font-size:1.15rem;color:var(--muted);max-width:46ch;margin-bottom:28px}
+.bakery .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.bakery .hero-stats{display:flex;gap:32px;margin-top:42px;padding-top:28px;border-top:1px dashed var(--line);flex-wrap:wrap}
+.bakery .hero-stats div span{display:block;font-family:'Fraunces',serif;font-size:1.6rem;color:var(--rose-deep);font-weight:700}
+.bakery .hero-stats div small{color:var(--muted);font-size:.85rem}
+.bakery .hero-art{position:relative;aspect-ratio:1/1;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff 0,var(--blush) 35%,var(--pink) 70%,var(--rose) 100%);box-shadow:0 30px 80px rgba(184,92,111,.25);display:flex;align-items:center;justify-content:center}
+.bakery .hero-art::before,.bakery .hero-art::after{content:"";position:absolute;border-radius:50%}
+.bakery .hero-art::before{width:120px;height:120px;background:var(--mint);top:-20px;right:30px;box-shadow:var(--shadow)}
+.bakery .hero-art::after{width:90px;height:90px;background:var(--butter);bottom:10px;left:-10px;box-shadow:var(--shadow)}
+.bakery .hero-emoji{font-size:8rem;filter:drop-shadow(0 8px 20px rgba(0,0,0,.15))}
+@media(max-width:880px){ .bakery .hero-grid{grid-template-columns:1fr} .bakery .hero-art{max-width:360px;margin:0 auto} }
+
+.bakery section{padding:80px 0}
+.bakery .section-head{text-align:center;max-width:640px;margin:0 auto 50px}
+.bakery .section-head p{color:var(--muted)}
+
+.bakery .highlights{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.bakery .hl{background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.bakery .hl::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--hl-color,var(--pink))}
+.bakery .hl .emoji{font-size:2.2rem;display:block;margin:8px 0 14px}
+.bakery .badge{display:inline-block;background:var(--blush);color:var(--rose-deep);font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.04em;text-transform:uppercase}
+.bakery .hl h3{margin:6px 0 4px;font-size:1.1rem}
+.bakery .hl p{font-size:.9rem;color:var(--muted);margin:0}
+@media(max-width:880px){ .bakery .highlights{grid-template-columns:repeat(2,1fr)} }
+
+.bakery .menu-wrap{background:linear-gradient(180deg,#fff,var(--blush) 100%);border-radius:28px;padding:50px 40px;box-shadow:var(--shadow)}
+.bakery .menu-source{text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:30px}
+.bakery .menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:40px}
+.bakery .menu-cat h3{font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:14px;padding-bottom:10px;border-bottom:2px dotted var(--pink);color:var(--rose-deep)}
+.bakery .menu-item{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line)}
+.bakery .menu-item:last-child{border-bottom:none}
+.bakery .menu-item .name{font-weight:500}
+.bakery .menu-item .price{color:var(--rose-deep);font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+.bakery .menu-item .desc{display:block;font-size:.82rem;color:var(--muted);margin-top:4px;font-style:italic;max-width:46ch}
+@media(max-width:780px){ .bakery .menu-grid{grid-template-columns:1fr} .bakery .menu-wrap{padding:30px 20px} }
+
+.bakery .reviews{background:var(--lilac)}
+.bakery .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.bakery .review{background:#fff;border-radius:var(--radius);padding:26px;box-shadow:0 6px 20px rgba(90,63,122,.08);display:flex;flex-direction:column}
+.bakery .review-feature{background:var(--butter)}
+.bakery .feature-quote{font-family:'Fraunces',serif;font-size:1.15rem;font-style:italic}
+.bakery .stars{color:#e8a93a;letter-spacing:2px;margin-bottom:10px}
+.bakery .review p{font-size:.95rem;color:#4a3a3f;flex:1}
+.bakery .review .who{display:flex;align-items:center;gap:12px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.bakery .avatar{width:40px;height:40px;border-radius:50%;background:var(--pink);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-family:'Fraunces',serif}
+.bakery .avatar-rose{background:var(--rose-deep)}
+.bakery .review .who small{display:block;color:var(--muted);font-size:.78rem}
+@media(max-width:880px){ .bakery .reviews-grid{grid-template-columns:1fr} }
+
+.bakery .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.bakery .info-card{background:#fff;border-radius:var(--radius);padding:32px;box-shadow:var(--shadow)}
+.bakery .info-card h3{color:var(--rose-deep);margin-bottom:6px}
+.bakery .info-card p{margin:0 0 18px;color:var(--muted)}
+.bakery .hours{list-style:none;padding:0;margin:0}
+.bakery .hours li{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px dashed var(--line);font-size:.95rem}
+.bakery .hours li:last-child{border-bottom:none}
+.bakery .hours li span:first-child{color:var(--ink);font-weight:500}
+.bakery .contact-line{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+.bakery .contact-line .ic{width:38px;height:38px;border-radius:10px;background:var(--blush);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.bakery .contact-line strong{display:block;margin-bottom:2px}
+.bakery .contact-line a{color:var(--ink)}
+@media(max-width:880px){ .bakery .visit-grid{grid-template-columns:1fr} }
+
+.bakery footer{background:var(--ink);color:#f7e3e7;padding:50px 0 30px;text-align:center}
+.bakery .brand-footer{justify-content:center;color:#fff;display:inline-flex}
+.bakery footer p{color:#d6bfc4;font-size:.9rem;margin-top:12px}
+.bakery footer .small{font-size:.78rem;color:#a7929a;margin-top:24px}
+`;
