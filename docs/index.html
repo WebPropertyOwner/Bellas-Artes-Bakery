@@ -102,7 +102,116 @@ footer{background:var(--ink);color:#f7e3e7;padding:50px 0 30px;text-align:center
 .brand-footer{justify-content:center;color:#fff;display:inline-flex}
 footer p{color:#d6bfc4;font-size:.9rem;margin-top:12px}
 footer .small{font-size:.78rem;color:#a7929a;margin-top:24px}
+
+  .gallery-main-wrap{
+  position:relative;
+  overflow:hidden;
+  border-radius:24px;
+}
+
+.gallery-main{
+  width:100%;
+  height:500px;
+  object-fit:cover;
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  display:block;
+  opacity:1;
+  transition:opacity .4s ease;
+  cursor:pointer;
+}
+
+.gallery-main.fade{
+  opacity:.25;
+}
+
+.gallery-counter{
+  position:absolute;
+  bottom:18px;
+  right:18px;
+  background:rgba(0,0,0,.65);
+  color:white;
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:.85rem;
+  z-index:3;
+}
+
+.gallery-thumbs img{
+  opacity:.7;
+}
+
+.gallery-thumbs img.active{
+  opacity:1;
+  border-color:var(--rose-deep);
+}
+
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  padding:20px;
+}
+
+.lightbox.active{
+  display:flex;
+}
+
+.lightbox img{
+  max-width:95%;
+  max-height:90vh;
+  border-radius:12px;
+}
+
+.lightbox-close{
+  position:absolute;
+  top:20px;
+  right:30px;
+  color:white;
+  font-size:3rem;
+  cursor:pointer;
+}
+
+.lightbox-nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  color:white;
+  font-size:3rem;
+  cursor:pointer;
+  user-select:none;
+}
+
+.lightbox-prev{
+  left:25px;
+}
+
+.lightbox-next{
+  right:25px;
+}
+
+@media(max-width:768px){
+  .gallery-main{
+    height:300px;
+  }
+
+  .gallery-btn{
+    width:44px;
+    height:44px;
+  }
+}
+  
 </style>
+
+
+
+
+
+  
 </head>
 <body>
 <header class="nav"><div class="nav-inner">
@@ -220,12 +329,67 @@ footer .small{font-size:.78rem;color:#a7929a;margin-top:24px}
   </div>
 </div></section>
 
+<section id="gallery" class="gallery-section">
+  <div class="container">
+
+    <div class="section-head">
+      <h2>Bakery Gallery</h2>
+      <p>See some of our favorite cakes, conchas, pan dulce and custom creations.</p>
+    </div>
+
+    <div class="gallery-slider" id="gallerySlider">
+
+      <button class="gallery-btn gallery-prev">❮</button>
+
+      <div class="gallery-main-wrap">
+
+        <img
+          id="galleryMain"
+          class="gallery-main"
+          src="images/cake1.jpg"
+          alt="Bellas Artes Bakery">
+
+        <div class="gallery-counter">
+          <span id="galleryCurrent">1</span> /
+          <span id="galleryTotal">6</span>
+        </div>
+
+      </div>
+
+      <button class="gallery-btn gallery-next">❯</button>
+
+    </div>
+
+    <div class="gallery-thumbs">
+      <img src="assets/pastryset.jpg" class="active">
+      <img src="assets/pastry.jpg">
+      <img src="assets/goldcake.jpg">
+      <img src="assets/29cake.jpg">
+      <img src="assets/conchas.jpg">
+      <img src="assets/tresleches.jpg">
+    </div>
+
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+
+  <span class="lightbox-close">&times;</span>
+
+  <span class="lightbox-nav lightbox-prev">❮</span>
+
+  <img id="lightboxImage" src="" alt="">
+
+  <span class="lightbox-nav lightbox-next">❯</span>
+
+</div>
+  
 <section id="reviews" class="reviews"><div class="container">
   <div class="section-head"><h2>What guests are saying</h2><p>From wedding cakes to a quick concha on the way home.</p></div>
   <div class="reviews-grid">
     <div class="review"><div class="stars">★★★★★</div><p>"We are extremely happy with our wedding cake from here. Before going to this shop, we visited and researched many other cake places and were very disappointed by the prices. Other places charged a hefty price for a tiny cake."</p><div class="who"><div class="avatar">R</div><div><strong>Rarest Beauty</strong></div></div></div>
     <div class="review"><div class="stars">★★★★★</div><p>"Went there for the 1st time for my birthday cake and the cake was perfect. So moist and yummy. My family and friends can't stop talking about it. Just the right amount of sweetness, and very affordable."</p><div class="who"><div class="avatar">D</div><div><strong>dzein kaeral</strong></div></div></div>
-    <div class="review"><div class="stars">★★★★★</div><p>"Great place for cakes and desserts! Been here for years! Wouldn't trust any other bakery — this is the best one for me."</p><div class="who"><div class="avatar">C</div><div><strong>Crysss</strong><small>Local Guide · 8 months ago</small></div></div></div>
+    <div class="review"><div class="stars">★★★★★</div><p>"Great place for cakes and desserts! Been here for years! Wouldn't trust any other bakery — this is the best one for me."</p><div class="who"><div class="avatar">C</div><div><strong>Crysss</strong></div></div></div>
     <div class="review"><div class="stars">★★★★★</div><p>"If you're looking for something sweet and cheap, I really recommend coming here and grabbing some pan dulce. So many to choose from and literally so good and so inexpensive."</p><div class="who"><div class="avatar">A</div><div><strong>Angellina Medina</strong></div></div></div>
     <div class="review"><div class="stars">★★★★★</div><p>"They did an amazing job on this cake and it was delicious 😋 — it looks exactly like the picture we asked for and they are not overly priced. We will use this bakery again for future cakes."</p><div class="who"><div class="avatar">V</div><div><strong>Vonda Walkama</strong></div></div></div>
     <div class="review review-feature"><div class="stars">★★★★★</div><p class="feature-quote">"The best pan dulce in Federal Way — and the kindest people behind the counter."</p><div class="who"><div class="avatar avatar-rose">♡</div><div><strong>Neighborhood favorite</strong><small>Bellas Artes regulars</small></div></div></div>
@@ -262,5 +426,163 @@ footer .small{font-size:.78rem;color:#a7929a;margin-top:24px}
   <p>29314 Pacific Hwy S #101A, Federal Way, WA · (253) 946-0133</p>
   <p class="small">© Bellas Artes Bakery. Baked with love every day.</p>
 </div></footer>
+
+
+<script>
+const galleryImages = [
+  "assets/pastryset.jpg",
+  "assets/pastry.jpg",
+  "assets/goldcake.jpg",
+  "assets/29cake.jpg",
+  "assets/conchas.jpg",
+  "assets/tresleches.jpg"
+];
+
+let currentSlide = 0;
+
+const mainImage = document.getElementById("galleryMain");
+const currentCounter = document.getElementById("galleryCurrent");
+const totalCounter = document.getElementById("galleryTotal");
+
+const thumbs = document.querySelectorAll(".gallery-thumbs img");
+
+const prevBtn = document.querySelector(".gallery-prev");
+const nextBtn = document.querySelector(".gallery-next");
+
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightboxImage");
+
+totalCounter.textContent = galleryImages.length;
+
+function updateGallery(){
+
+  mainImage.classList.add("fade");
+
+  setTimeout(() => {
+
+    mainImage.src = galleryImages[currentSlide];
+
+    currentCounter.textContent = currentSlide + 1;
+
+    thumbs.forEach((thumb,index)=>{
+      thumb.classList.toggle("active",index===currentSlide);
+    });
+
+    mainImage.classList.remove("fade");
+
+  },150);
+}
+
+function showSlide(index){
+  currentSlide=index;
+  updateGallery();
+}
+
+function nextSlide(){
+  currentSlide++;
+  if(currentSlide>=galleryImages.length){
+    currentSlide=0;
+  }
+  updateGallery();
+}
+
+function prevSlide(){
+  currentSlide--;
+  if(currentSlide<0){
+    currentSlide=galleryImages.length-1;
+  }
+  updateGallery();
+}
+
+nextBtn.addEventListener("click",nextSlide);
+prevBtn.addEventListener("click",prevSlide);
+
+thumbs.forEach((thumb,index)=>{
+  thumb.addEventListener("click",()=>{
+    showSlide(index);
+  });
+});
+
+let autoPlay = setInterval(nextSlide,5000);
+
+const gallery = document.getElementById("gallerySlider");
+
+gallery.addEventListener("mouseenter",()=>{
+  clearInterval(autoPlay);
+});
+
+gallery.addEventListener("mouseleave",()=>{
+  autoPlay=setInterval(nextSlide,5000);
+});
+
+mainImage.addEventListener("click",()=>{
+  lightbox.classList.add("active");
+  lightboxImg.src=galleryImages[currentSlide];
+});
+
+document.querySelector(".lightbox-close")
+.addEventListener("click",()=>{
+  lightbox.classList.remove("active");
+});
+
+document.querySelector(".lightbox-next")
+.addEventListener("click",()=>{
+  nextSlide();
+  lightboxImg.src=galleryImages[currentSlide];
+});
+
+document.querySelector(".lightbox-prev")
+.addEventListener("click",()=>{
+  prevSlide();
+  lightboxImg.src=galleryImages[currentSlide];
+});
+
+lightbox.addEventListener("click",(e)=>{
+  if(e.target===lightbox){
+    lightbox.classList.remove("active");
+  }
+});
+
+document.addEventListener("keydown",(e)=>{
+
+  if(e.key==="ArrowRight"){
+    nextSlide();
+    if(lightbox.classList.contains("active")){
+      lightboxImg.src=galleryImages[currentSlide];
+    }
+  }
+
+  if(e.key==="ArrowLeft"){
+    prevSlide();
+    if(lightbox.classList.contains("active")){
+      lightboxImg.src=galleryImages[currentSlide];
+    }
+  }
+
+  if(e.key==="Escape"){
+    lightbox.classList.remove("active");
+  }
+});
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+gallery.addEventListener("touchstart",(e)=>{
+  touchStartX=e.changedTouches[0].screenX;
+});
+
+gallery.addEventListener("touchend",(e)=>{
+  touchEndX=e.changedTouches[0].screenX;
+
+  if(touchStartX-touchEndX>50){
+    nextSlide();
+  }
+
+  if(touchEndX-touchStartX>50){
+    prevSlide();
+  }
+});
+</script>
+  
 </body>
 </html>
